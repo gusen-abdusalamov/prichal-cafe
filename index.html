@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
 
@@ -156,10 +156,18 @@
         <div class="info-card">
           <h3>Телефон</h3>
           <p><a data-phone-link href="#"><span data-phone-text data-fallback="Уточняется">Уточняется</span></a></p>
-          <div class="socials">
-            <a data-instagram href="#" target="_blank" aria-label="Instagram">IG</a>
-            <a data-vk href="#" target="_blank" aria-label="VK">VK</a>
-          </div>
+        </div>
+        <div class="info-card" data-social-card>
+          <h3>Мы в соцсетях</h3>
+          <a class="social-btn social-btn--ig" data-instagram href="#" target="_blank" rel="noopener">
+            <svg class="social-btn__ic" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4.4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="17.6" cy="6.4" r="1.4" fill="currentColor"/>
+            </svg>
+            <span data-ig-handle>Instagram</span>
+          </a>
+          <a class="social-btn social-btn--vk" data-vk href="#" target="_blank" rel="noopener">ВКонтакте</a>
         </div>
         <div class="info-card">
           <h3>Доставка</h3>
@@ -219,6 +227,6 @@
 
   <script src="js/config.js?v=6"></script>
   <script src="js/menu-data.js?v=5"></script>
-  <script src="js/app.js?v=5"></script>
+  <script src="js/app.js?v=7"></script>
 </body>
 </html>

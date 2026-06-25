@@ -172,9 +172,14 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .info-card h3 { font-size: 15px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-family: var(--font-body); font-weight: 700; margin-bottom: 10px; }
 .info-card p { margin: 0; font-size: 18px; font-weight: 600; }
 .info-card ul { margin: 0; padding-left: 18px; color: var(--ink); }
-.info-card .socials { display: flex; gap: 10px; margin-top: 6px; }
-.socials a { width: 42px; height: 42px; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: var(--navy); transition: .15s; }
-.socials a:hover { background: var(--navy); color: #fff; }
+.social-btn { display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; padding: 13px 16px; border-radius: 12px; font-weight: 700; font-size: 16px; color: #fff; transition: transform .12s, box-shadow .15s, filter .15s; }
+.social-btn:active { transform: translateY(1px); }
+.social-btn + .social-btn { margin-top: 10px; }
+.social-btn__ic { flex: none; }
+.social-btn--ig { background: linear-gradient(45deg, #f9ce34 0%, #ee2a7b 45%, #6228d7 100%); box-shadow: 0 8px 20px rgba(238,42,123,.28); }
+.social-btn--ig:hover { filter: brightness(1.05); box-shadow: 0 10px 26px rgba(238,42,123,.38); }
+.social-btn--vk { background: #0077ff; box-shadow: 0 8px 20px rgba(0,119,255,.25); }
+.social-btn--vk:hover { filter: brightness(1.05); }
 
 /* ===== Подвал ===== */
 .footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 40px 0; margin-top: 0; }

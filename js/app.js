@@ -310,6 +310,14 @@
     linkOrHide('[data-vk]', CONFIG.vk);
     linkOrHide('[data-map]', CONFIG.yandexMap);
 
+    // ник в кнопке Instagram + скрыть карточку соцсетей, если их нет
+    var igHandle = el('[data-ig-handle]');
+    if (igHandle) igHandle.textContent = CONFIG.instagram
+      ? '@' + CONFIG.instagram.replace(/\/+$/, '').split('/').pop()
+      : 'Instagram';
+    var socialCard = el('[data-social-card]');
+    if (socialCard && !CONFIG.instagram && !CONFIG.vk) socialCard.style.display = 'none';
+
     // блок доставки
     const d = CONFIG.delivery || {};
     const dParts = [];
