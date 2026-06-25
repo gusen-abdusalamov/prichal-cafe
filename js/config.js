@@ -25,7 +25,7 @@ const CONFIG = {
   telegram: '',             // username без @, напр. 'prichal_cafe'
 
   // --- Соцсети (по желанию, оставьте '' если нет) ---
-  instagram: '',       // ссылка целиком, напр. 'https://instagram.com/...'
+  instagram: 'https://instagram.com/prichal_levashi',  // ссылка целиком
   vk: '',
   yandexMap: '',       // ссылка на карту/2ГИС для кнопки «Как добраться»
 
