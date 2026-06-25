@@ -126,6 +126,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .dish__img { aspect-ratio: 4 / 3; overflow: hidden; background: #f0efec; }
 .dish__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
 .dish:hover .dish__img img { transform: scale(1.05); }
+/* Бургеры/гарниры — вертикальные фото, объект в нижней части кадра:
+   квадратный кадр + привязка к низу, чтобы бургер был крупно и по центру */
+#cat-food-burgers .dish__img,
+#cat-food-nuggets .dish__img { aspect-ratio: 1 / 1; }
+#cat-food-burgers .dish__img img,
+#cat-food-nuggets .dish__img img { object-position: center 78%; }
 .dish__body { padding: 14px 15px 15px; display: flex; flex-direction: column; flex: 1; gap: 6px; }
 .dish--photo .dish__name { font-size: 17px; }
 .dish__name { font-size: 16px; font-weight: 700; font-family: var(--font-body); }
