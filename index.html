@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Причал — роллы, пицца, бургеры и кофе с доставкой</title>
+  <meta name="description" content="Кафе «Причал»: роллы, пицца, бургеры, шаурма и авторский кофе. Закажите доставку прямо с сайта в WhatsApp или Telegram.">
+  <link rel="icon" href="assets/img/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+<body>
+
+  <!-- ШАПКА -->
+  <header class="header">
+    <div class="wrap header__inner">
+      <a href="#top" class="brand">
+        <img src="assets/img/logo.jpg" alt="Логотип Причал">
+        <span data-cafe-name>Причал</span>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="#menu">Меню</a>
+        <a href="#about">О нас</a>
+        <a href="#promos">Акции</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header__actions">
+        <a class="btn btn--ghost btn--sm icon-call" data-phone-link href="#contacts">
+          📞 <span data-phone-text data-fallback="Позвонить">Позвонить</span>
+        </a>
+        <a class="btn btn--primary" href="#menu">Заказать</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Меню"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="hero__bg">
+      <img src="assets/img/roll-goryachiy-shik.jpg" alt="Роллы Причал">
+    </div>
+    <div class="wrap hero__inner">
+      <span class="hero__eyebrow">🛥 <span data-city data-fallback="Ваш город">Ваш город</span> · доставка и самовывоз</span>
+      <h1>Кафе <span data-cafe-name>Причал</span></h1>
+      <p data-tagline>Роллы, пицца, бургеры и авторский кофе. Готовим из свежих продуктов и привозим горячим.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#menu">Смотреть меню</a>
+        <button class="btn btn--ghost" data-open-cart>🛒 Моя корзина</button>
+      </div>
+      <div class="hero__meta">
+        <div>📍 <b data-address data-fallback="Адрес уточняется">Адрес уточняется</b></div>
+        <div>🕑 <b data-hours data-fallback="Часы уточняются">Часы уточняются</b></div>
+        <div>📞 <b data-phone-text data-fallback="Телефон уточняется">Телефон уточняется</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Преимущества -->
+  <div class="marquee">
+    <div class="wrap">
+      <ul>
+        <li>Готовим на заказ</li>
+        <li>Доставка и самовывоз</li>
+        <li>Свежие роллы каждый день</li>
+        <li>Авторский кофе</li>
+        <li>Оплата при получении</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- МЕНЮ -->
+  <section class="section menu" id="menu">
+    <div class="wrap">
+      <h2 class="section__title">Меню</h2>
+      <p class="section__lead">Выберите блюда и напитки — соберите заказ, а мы приготовим и привезём.</p>
+
+      <div class="group-tabs" role="tablist">
+        <button class="group-tab group-tab--active" data-group="food">🍽 Кухня</button>
+        <button class="group-tab" data-group="drinks">☕ Напитки</button>
+      </div>
+    </div>
+
+    <div class="chips-bar">
+      <div class="wrap"><div class="chips" id="menu-chips"></div></div>
+    </div>
+
+    <div class="wrap">
+      <div id="menu-sections"></div>
+    </div>
+  </section>
+
+  <!-- О НАС -->
+  <section class="section" id="about">
+    <div class="wrap about__grid">
+      <div class="about__text">
+        <h2 class="section__title">О кафе «Причал»</h2>
+        <p>«Причал» — это место, куда хочется причалить за вкусной едой. У нас под одной крышей собрались
+          сочные роллы, ароматная пицца, большие бургеры, шаурма и авторский кофе. Готовим каждое блюдо
+          на заказ из свежих продуктов и привозим его к вам горячим.</p>
+        <p>Закажите доставку прямо с сайта — в пару кликов через WhatsApp или Telegram, оплата при получении.</p>
+        <div class="about__stats">
+          <div class="about__stat"><b>100+</b><span>блюд и напитков</span></div>
+          <div class="about__stat"><b>28</b><span>видов роллов</span></div>
+          <div class="about__stat"><b>★ 5,0</b><span>любим гостями</span></div>
+        </div>
+      </div>
+      <div class="about__media">
+        <img src="assets/img/roll-syrnyy.jpg" alt="Ролл">
+        <img src="assets/img/roll-california.jpg" alt="Калифорния">
+        <img src="assets/img/krevetki-klyar.jpg" alt="Креветки в кляре">
+      </div>
+    </div>
+  </section>
+
+  <!-- АКЦИИ -->
+  <section class="section promos" id="promos">
+    <div class="wrap">
+      <h2 class="section__title">Акции и новости</h2>
+      <p class="section__lead">Примеры блоков — замените на свои актуальные предложения.</p>
+      <div class="promo-grid">
+        <div class="promo promo--1">
+          <span class="promo__tag">АКЦИЯ</span>
+          <h3>−15% на первый заказ</h3>
+          <p>Закажите доставку впервые и получите скидку на весь чек.</p>
+        </div>
+        <div class="promo promo--2">
+          <span class="promo__tag">ХИТ</span>
+          <h3>Сет дня</h3>
+          <p>Большой набор роллов по специальной цене — следите за обновлениями.</p>
+        </div>
+        <div class="promo promo--3">
+          <span class="promo__tag">НОВИНКА</span>
+          <h3>Кофе + ролл</h3>
+          <p>Авторский раф и горячий ролл — идеальная пара на перекус.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section class="section" id="contacts">
+    <div class="wrap">
+      <h2 class="section__title">Контакты и доставка</h2>
+      <div class="contacts__grid">
+        <div class="info-card">
+          <h3>Адрес</h3>
+          <p data-address data-fallback="Уточняется">Уточняется</p>
+          <a class="btn btn--ghost btn--sm" data-map href="#" target="_blank" style="margin-top:10px">Как добраться</a>
+        </div>
+        <div class="info-card">
+          <h3>Часы работы</h3>
+          <p data-hours data-fallback="Уточняется">Уточняется</p>
+        </div>
+        <div class="info-card">
+          <h3>Телефон</h3>
+          <p><a data-phone-link href="#"><span data-phone-text data-fallback="Уточняется">Уточняется</span></a></p>
+          <div class="socials">
+            <a data-instagram href="#" target="_blank" aria-label="Instagram">IG</a>
+            <a data-vk href="#" target="_blank" aria-label="VK">VK</a>
+          </div>
+        </div>
+        <div class="info-card">
+          <h3>Доставка</h3>
+          <ul data-delivery>
+            <li>Доставка по городу и самовывоз</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОДВАЛ -->
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <a href="#top" class="brand">
+        <img src="assets/img/logo.jpg" alt="Логотип Причал">
+        <span data-cafe-name>Причал</span>
+      </a>
+      <small>© <span id="year">2026</span> Кафе «Причал». Все права защищены.</small>
+    </div>
+  </footer>
+
+  <!-- Плавающая корзина -->
+  <button class="cart-fab" id="cart-fab">
+    🛒 <span id="fab-total"></span>
+    <span class="cart-fab__badge is-hidden" data-cart-count>0</span>
+  </button>
+
+  <!-- Drawer корзины -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart" id="cart" aria-label="Корзина">
+    <div class="cart__head">
+      <h3>Корзина <span class="cart-fab__badge is-hidden" data-cart-count style="background:var(--navy);color:#fff">0</span></h3>
+      <button class="cart__close" id="cart-close" aria-label="Закрыть">×</button>
+    </div>
+    <div class="cart__items" id="cart-items"></div>
+    <div class="cart__foot">
+      <div class="cart__total"><span>Итого</span><span id="cart-total">0 ₽</span></div>
+      <button class="btn btn--primary" id="cart-checkout">Оформить заказ</button>
+    </div>
+  </aside>
+
+  <!-- Модалка оформления -->
+  <div class="modal" id="checkout-modal">
+    <div class="modal__box">
+      <div class="modal__head">
+        <h3>Оформление заказа</h3>
+        <button class="modal__close" id="checkout-close" aria-label="Закрыть">×</button>
+      </div>
+      <p class="checkout__hint">Проверьте заказ и допишите имя, телефон и адрес — затем отправьте его нам удобным способом.</p>
+      <textarea id="checkout-text" readonly></textarea>
+      <div class="checkout__actions" id="checkout-actions" style="margin-top:14px"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/config.js?v=2"></script>
+  <script src="js/menu-data.js?v=2"></script>
+  <script src="js/app.js?v=2"></script>
+</body>
+</html>

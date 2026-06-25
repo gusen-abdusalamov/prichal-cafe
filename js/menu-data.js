@@ -1,0 +1,264 @@
+/*
+ * Меню кафе «Причал» — оцифровано с фотографий прайс-листов.
+ * Структура: MENU.food / MENU.drinks — массивы категорий.
+ * Категория: { id, title, note?, items: [...] }
+ * Блюдо: { name, desc?, img?, price?  ИЛИ  variants:[{label, price}] }
+ *   - price      — одна цена (число, в рублях)
+ *   - variants   — несколько вариантов (объём/размер) с разными ценами
+ */
+
+const MENU = {
+  food: [
+    {
+      id: 'pizza',
+      title: 'Пицца',
+      items: [
+        { name: 'Ассорти', price: 390, img: 'pizza-assorti.jpg' },
+        { name: 'Цезарь', price: 390, img: 'pizza-cezar.jpg' },
+        { name: 'Мексика', price: 390 },
+        { name: 'Куриная', price: 390 },
+        { name: 'Куриная с копчёным мясом', price: 390 },
+        { name: 'Времена года', price: 390 },
+        { name: 'Охотничья', price: 390 },
+        { name: 'Пепперони', price: 390 },
+        { name: 'Грибная', price: 390 },
+        { name: 'С фаршем', price: 390 },
+        { name: 'Жульен', price: 390 },
+        { name: '4 сыра', price: 390 },
+        { name: 'С креветками', price: 420 },
+        { name: 'Ойси', price: 420 },
+        { name: 'Маргарита', price: 320 },
+      ],
+    },
+    {
+      id: 'burgers',
+      title: 'Бургеры и хот-дог',
+      items: [
+        { name: 'Хот-дог', desc: 'Сосиска «Дарман»', price: 200 },
+        { name: 'Бургер «Причал»', desc: 'Готовится с куриными наггетсами', price: 220 },
+        { name: 'Бургер «Питер»', desc: 'Одна куриная котлета', price: 160 },
+        { name: 'Бургер «Мексика»', desc: 'Одна говяжья котлета', price: 160 },
+        { name: 'Бургер «Тейсти»', desc: 'Две куриные котлеты', price: 220 },
+        { name: 'Бургер «Биг Босс»', desc: 'Две говяжьи котлеты', price: 220 },
+        { name: 'Бургер от шеф-повара', price: 250 },
+        { name: 'Коста Рика', desc: 'Две говяжьи котлеты, фри, соус Heinz', price: 320 },
+        { name: 'Комбо-набор', desc: 'Говяжья котлета, наггетсы 3 шт, фри, соус Heinz, сок 0,5 л на выбор', price: 350 },
+      ],
+    },
+    {
+      id: 'nuggets',
+      title: 'Наггетсы и гарниры',
+      items: [
+        {
+          name: 'Наггетсы',
+          variants: [
+            { label: '3 шт', price: 115 },
+            { label: '6 шт', price: 190 },
+            { label: '9 шт', price: 290 },
+            { label: '12 шт', price: 350 },
+          ],
+        },
+        { name: 'Набор гурмана', price: 550 },
+        { name: 'Картошка фри', price: 130 },
+        { name: 'Картошка по-деревенски', price: 140 },
+      ],
+    },
+    {
+      id: 'rolls-cold',
+      title: 'Роллы холодные',
+      items: [
+        { name: 'Калифорния', desc: 'С курицей / с лососем / с креветкой', price: 370, img: 'roll-california.jpg' },
+        { name: 'Калифорния запечённая', price: 390, img: 'roll-california-zapech.jpg' },
+        { name: 'Дракон', price: 370, img: 'roll-drakon.jpg' },
+        { name: 'Окинава', price: 370, img: 'roll-okinava.jpg' },
+        { name: 'Цезарь лайт', price: 370, img: 'roll-cezar-light.jpg' },
+        { name: 'Ойси', price: 390, img: 'roll-oysi.jpg' },
+        { name: 'Филадельфия классическая', price: 370 },
+        { name: 'Филадельфия по-королевски', price: 390 },
+        { name: 'Бешеная креветка', price: 370, img: 'roll-beshenyy.jpg' },
+        { name: 'Бешеный лосось', price: 370, img: 'roll-beshenyy.jpg' },
+        { name: 'Нори запечённая', price: 320, img: 'roll-nori-zapech.jpg' },
+        { name: 'Нори с огурцом', price: 195, img: 'roll-nori.jpg' },
+        { name: 'Нори с креветкой', price: 240, img: 'roll-nori.jpg' },
+        { name: 'Нори с лососем', price: 240, img: 'roll-nori.jpg' },
+      ],
+    },
+    {
+      id: 'rolls-hot',
+      title: 'Роллы горячие',
+      items: [
+        { name: 'Цезарь с курицей', price: 290, img: 'roll-cezar-hot.jpg' },
+        { name: 'Цезарь с лососем', price: 370 },
+        { name: 'Цезарь с креветкой', price: 370 },
+        { name: 'Цезарь с курицей запечённая', price: 370, img: 'roll-cezar-zapech.jpg' },
+        { name: 'Горячий шик', price: 370, img: 'roll-goryachiy-shik.jpg' },
+        { name: 'Япоша', price: 370, img: 'roll-yaposha.jpg' },
+        { name: 'Кобра', price: 370, img: 'roll-kobra.jpg' },
+        { name: 'Токио', price: 370, img: 'roll-tokio.jpg' },
+        { name: 'Креветки в кляре', price: 370, img: 'krevetki-klyar.jpg' },
+        { name: 'Ролл «Новинка»', price: 370, img: 'roll-novinka.jpg' },
+        { name: 'Вулкан', price: 370, img: 'roll-vulkan.jpg' },
+        { name: 'Цезарь люкс', price: 370, img: 'roll-cezar-lux.jpg' },
+        { name: 'Самурай', price: 370, img: 'roll-samurai.jpg' },
+        { name: 'Кабуки ролл', price: 370, img: 'roll-kabuki.jpg' },
+      ],
+    },
+    {
+      id: 'shawarma',
+      title: 'Шаурма',
+      items: [
+        { name: 'Куриная', price: 200 },
+        { name: 'Говяжья', price: 230 },
+        { name: 'В кляре', price: 250 },
+      ],
+    },
+    {
+      id: 'sauces',
+      title: 'Соусы и дополнительно',
+      items: [
+        { name: 'Соус сырный', price: 40 },
+        { name: 'Соус томатный', price: 40 },
+        { name: 'Соус острый', price: 40 },
+        { name: 'Доп. соус в бургер', price: 40 },
+        { name: 'Соевый соус', price: 40 },
+        { name: 'Ореховый соус', price: 40 },
+        { name: 'Имбирь', price: 40 },
+        { name: 'Васаби', price: 30 },
+      ],
+    },
+  ],
+
+  drinks: [
+    {
+      id: 'coffee-classic',
+      title: 'Кофе классика',
+      items: [
+        { name: 'Эспрессо', price: 125 },
+        { name: 'Лунго', price: 125 },
+        { name: 'Американо', price: 125 },
+        { name: 'Воронка V60', variants: [{ label: '200 мл', price: 200 }, { label: '300 мл', price: 300 }] },
+        { name: 'Австралийский лунго', variants: [{ label: '200 мл', price: 200 }, { label: '300 мл', price: 300 }] },
+      ],
+    },
+    {
+      id: 'shots',
+      title: 'Шоты',
+      items: [
+        { name: 'Эспрессо + фреш', price: 250 },
+        { name: 'Витаминный шот', price: 350 },
+        { name: 'Витаминный против гриппа', price: 350 },
+        { name: 'Будильник', price: 220 },
+        { name: 'Эспрессо тоник', price: 250 },
+      ],
+    },
+    {
+      id: 'milk-coffee',
+      title: 'Молочный кофе',
+      note: 'Дополнительный сироп — 30 ₽',
+      items: [
+        { name: 'Капучино', variants: [{ label: '200 мл', price: 150 }, { label: '300 мл', price: 170 }] },
+        { name: 'Флэт Уайт', price: 170 },
+        { name: 'Латте', price: 170 },
+        { name: 'Какао', variants: [{ label: '200 мл', price: 150 }, { label: '300 мл', price: 200 }] },
+      ],
+    },
+    {
+      id: 'sweet-coffee',
+      title: 'Сладкий кофе',
+      items: [
+        { name: 'Раф классический', variants: [{ label: '200 мл', price: 190 }, { label: '300 мл', price: 220 }] },
+        { name: 'Раф кокосовый', variants: [{ label: '200 мл', price: 190 }, { label: '300 мл', price: 220 }] },
+        { name: 'Раф лавандовый', variants: [{ label: '200 мл', price: 190 }, { label: '300 мл', price: 220 }] },
+        { name: 'Раф арахис', variants: [{ label: '200 мл', price: 190 }, { label: '300 мл', price: 220 }] },
+        { name: 'Раф ванильный', variants: [{ label: '200 мл', price: 190 }, { label: '300 мл', price: 220 }] },
+        { name: 'Раф медовый', variants: [{ label: '200 мл', price: 220 }, { label: '300 мл', price: 250 }] },
+        { name: 'Раф урбечевый', variants: [{ label: '200 мл', price: 220 }, { label: '300 мл', price: 250 }] },
+      ],
+    },
+    {
+      id: 'cold-coffee',
+      title: 'Холодный кофе',
+      items: [
+        { name: 'Айс фьюри с урбечом', price: 230 },
+        { name: 'Айс латте', price: 200 },
+        { name: 'Айс кофе', price: 200 },
+        { name: 'Бамбл апельсин', price: 200 },
+        { name: 'Бамбл гранат', price: 200 },
+      ],
+    },
+    {
+      id: 'turka',
+      title: 'Турка с финиками',
+      items: [
+        { name: 'Большая', price: 300 },
+        { name: 'Средняя', price: 250 },
+        { name: 'Маленькая', price: 200 },
+        { name: 'На одного человека', price: 150 },
+      ],
+    },
+    {
+      id: 'tea',
+      title: 'Чай',
+      items: [
+        { name: 'Чёрный', variants: [{ label: 'Стакан', price: 150 }, { label: 'Чайник', price: 180 }] },
+        { name: 'Чёрный с имбирём', variants: [{ label: 'Стакан', price: 150 }, { label: 'Чайник', price: 180 }] },
+        { name: 'Зелёный', variants: [{ label: 'Стакан', price: 150 }, { label: 'Чайник', price: 180 }] },
+        { name: 'Горные травы', variants: [{ label: 'Стакан', price: 150 }, { label: 'Чайник', price: 180 }] },
+        { name: 'Наглый фрукт', variants: [{ label: 'Стакан', price: 150 }, { label: 'Чайник', price: 180 }] },
+      ],
+    },
+    {
+      id: 'author-tea',
+      title: 'Авторские чаи',
+      items: [
+        { name: 'Облепиховый', variants: [{ label: '500 мл', price: 250 }, { label: '800 мл', price: 280 }] },
+        { name: 'Имбирь-апельсин', variants: [{ label: '500 мл', price: 250 }, { label: '800 мл', price: 280 }] },
+        { name: 'Марокканский', variants: [{ label: '500 мл', price: 250 }, { label: '800 мл', price: 280 }] },
+        { name: 'Охотничий', variants: [{ label: '500 мл', price: 250 }, { label: '800 мл', price: 280 }] },
+      ],
+    },
+    {
+      id: 'fresh',
+      title: 'Фреши',
+      note: 'Объём 200 мл',
+      items: [
+        { name: 'Яблоко', price: 200 },
+        { name: 'Апельсин', price: 200 },
+        { name: 'Гранат', price: 200 },
+        { name: 'Гранат-апельсин', price: 200 },
+        { name: 'Мандарин', price: 200 },
+        { name: 'Морковный', price: 200 },
+      ],
+    },
+    {
+      id: 'lemonade',
+      title: 'Лимонады',
+      items: [
+        { name: 'Мохито', variants: [{ label: '400 мл', price: 180 }, { label: '1 л', price: 320 }] },
+        { name: 'Клубничный', variants: [{ label: '400 мл', price: 180 }, { label: '1 л', price: 320 }] },
+        { name: 'Сан-Пауло', variants: [{ label: '400 мл', price: 180 }, { label: '1 л', price: 320 }] },
+        { name: 'Ягодный', variants: [{ label: '400 мл', price: 180 }, { label: '1 л', price: 320 }] },
+        { name: 'Манго-маракуйя', variants: [{ label: '400 мл', price: 180 }, { label: '1 л', price: 320 }] },
+      ],
+    },
+    {
+      id: 'cocktails',
+      title: 'Коктейли и смузи',
+      note: 'Объём 300 мл',
+      items: [
+        { name: 'Банановый', price: 180 },
+        { name: 'Клубничный', price: 180 },
+        { name: 'Финиковый', price: 180 },
+        { name: 'Шоколадный', price: 180 },
+        { name: 'Пеликан', price: 200 },
+        { name: 'Смородина', price: 200 },
+        { name: 'Клубника-банан', price: 200 },
+        { name: 'Орео', price: 200 },
+        { name: 'Урбечевый', price: 220 },
+        { name: 'Сникерс', price: 220 },
+        { name: 'Протеиновый', price: 220 },
+        { name: 'Смузи иммунитет', price: 220 },
+      ],
+    },
+  ],
+};
