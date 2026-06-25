@@ -132,6 +132,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 #cat-food-nuggets .dish__img { aspect-ratio: 1 / 1; }
 #cat-food-burgers .dish__img img,
 #cat-food-nuggets .dish__img img { object-position: center 78%; }
+/* квадратный кадр для отдельных блюд (object-position задаётся в menu-data.js) */
+.dish__img--square { aspect-ratio: 1 / 1; }
 .dish__body { padding: 14px 15px 15px; display: flex; flex-direction: column; flex: 1; gap: 6px; }
 .dish--photo .dish__name { font-size: 17px; }
 .dish__name { font-size: 16px; font-weight: 700; font-family: var(--font-body); }

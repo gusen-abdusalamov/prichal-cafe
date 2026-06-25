@@ -90,8 +90,9 @@
 
     if (item.img) {
       const ph = document.createElement('div');
-      ph.className = 'dish__img';
-      ph.innerHTML = '<img loading="lazy" src="' + IMG + item.img + '?v=4" alt="' + item.name + '">';
+      ph.className = 'dish__img' + (item.square ? ' dish__img--square' : '');
+      const pos = item.pos ? ' style="object-position:' + item.pos + '"' : '';
+      ph.innerHTML = '<img loading="lazy"' + pos + ' src="' + IMG + item.img + '?v=' + (item.v || '4') + '" alt="' + item.name + '">';
       card.appendChild(ph);
     }
 
