@@ -91,7 +91,7 @@
     if (item.img) {
       const ph = document.createElement('div');
       ph.className = 'dish__img';
-      ph.innerHTML = '<img loading="lazy" src="' + IMG + item.img + '" alt="' + item.name + '">';
+      ph.innerHTML = '<img loading="lazy" src="' + IMG + item.img + '?v=4" alt="' + item.name + '">';
       card.appendChild(ph);
     }
 
