@@ -209,41 +209,71 @@
   }
 
   /* ---------- Оформление заказа ---------- */
+  function checkoutFields() {
+    const typeEl = document.querySelector('input[name="co-type"]:checked');
+    return {
+      name: el('#co-name').value.trim(),
+      phone: el('#co-phone').value.trim(),
+      type: typeEl ? typeEl.value : 'Доставка',
+      address: el('#co-address').value.trim(),
+      comment: el('#co-comment').value.trim(),
+    };
+  }
+
   function buildOrderText() {
+    const f = checkoutFields();
     const lines = ['Здравствуйте! Хочу сделать заказ в «Причал» 🛥', ''];
     Object.values(cart).forEach((it) => {
       lines.push('• ' + it.name + (it.variant ? ' (' + it.variant + ')' : '') +
         ' × ' + it.qty + ' — ' + money(it.price * it.qty));
     });
     lines.push('', 'Итого: ' + money(cartTotal()), '');
-    lines.push('Имя: ', 'Телефон: ', 'Доставка или самовывоз: ', 'Адрес: ', 'Комментарий: ');
+    lines.push('Имя: ' + f.name);
+    lines.push('Телефон: ' + f.phone);
+    lines.push(f.type === 'Самовывоз' ? 'Самовывоз' : ('Доставка по адресу: ' + f.address));
+    if (f.comment) lines.push('Комментарий: ' + f.comment);
     return lines.join('\n');
+  }
+
+  function validateOrder() {
+    const f = checkoutFields();
+    if (!f.name) { toast('Укажите имя'); el('#co-name').focus(); return false; }
+    if (!f.phone) { toast('Укажите телефон'); el('#co-phone').focus(); return false; }
+    if (f.type === 'Доставка' && !f.address) { toast('Укажите адрес доставки'); el('#co-address').focus(); return false; }
+    return true;
+  }
+
+  function renderCheckoutSummary() {
+    const rows = Object.values(cart).map((it) =>
+      '<div class="co-sum__row"><span>' + it.name + (it.variant ? ' <small>' + it.variant + '</small>' : '') +
+      ' × ' + it.qty + '</span><span>' + money(it.price * it.qty) + '</span></div>').join('');
+    el('#checkout-summary').innerHTML = rows +
+      '<div class="co-sum__total"><span>Итого</span><span>' + money(cartTotal()) + '</span></div>';
   }
 
   function openCheckout() {
     if (!cartCount()) return;
-    const text = buildOrderText();
-    const modal = el('#checkout-modal');
-    el('#checkout-text').value = text;
+    renderCheckoutSummary();
 
     const actions = el('#checkout-actions');
     actions.innerHTML = '';
-    const enc = encodeURIComponent(text);
 
     if (CONFIG.whatsapp) {
       addAction(actions, 'Отправить в WhatsApp', 'btn btn--wa', () => {
-        window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + enc, '_blank');
+        if (!validateOrder()) return;
+        window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(buildOrderText()), '_blank');
       });
     }
     if (CONFIG.telegram) {
       addAction(actions, 'Отправить в Telegram', 'btn btn--tg', () => {
-        copyText(text);
+        if (!validateOrder()) return;
+        copyText(buildOrderText());
         window.open('https://t.me/' + CONFIG.telegram, '_blank');
         toast('Текст заказа скопирован — вставьте его в чат Telegram');
       });
     }
-    addAction(actions, 'Скопировать текст', 'btn btn--ghost', () => {
-      copyText(text); toast('Текст заказа скопирован');
+    addAction(actions, 'Скопировать текст заказа', 'btn btn--ghost', () => {
+      copyText(buildOrderText()); toast('Текст заказа скопирован');
     });
 
     if (!CONFIG.whatsapp && !CONFIG.telegram) {
@@ -254,7 +284,7 @@
       actions.appendChild(note);
     }
 
-    modal.classList.add('is-open');
+    el('#checkout-modal').classList.add('is-open');
     document.body.classList.add('no-scroll');
   }
 
@@ -267,9 +297,15 @@
   }
 
   function copyText(t) {
-    if (navigator.clipboard) navigator.clipboard.writeText(t).catch(() => {});
-    else {
-      const ta = el('#checkout-text'); ta.select(); document.execCommand('copy');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).catch(legacyCopy);
+    } else legacyCopy();
+    function legacyCopy() {
+      const ta = document.createElement('textarea');
+      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
     }
   }
 
@@ -368,6 +404,12 @@
     el('#cart-checkout').addEventListener('click', () => { closeCart(); openCheckout(); });
     el('#checkout-close').addEventListener('click', closeModal);
     el('#checkout-modal').addEventListener('click', (e) => { if (e.target.id === 'checkout-modal') closeModal(); });
+
+    // показывать поле «Адрес» только для доставки
+    els('input[name="co-type"]').forEach((r) => r.addEventListener('change', () => {
+      const pickup = document.querySelector('input[name="co-type"]:checked').value === 'Самовывоз';
+      el('#co-address-wrap').style.display = pickup ? 'none' : '';
+    }));
 
     // мобильное меню-бургер
     el('#nav-toggle').addEventListener('click', () => el('#nav').classList.toggle('is-open'));

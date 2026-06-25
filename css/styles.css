@@ -230,8 +230,21 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .modal__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
 .modal__head h3 { font-size: 22px; font-weight: 800; }
 .modal__close { font-size: 26px; color: var(--muted); }
-#checkout-text { width: 100%; min-height: 200px; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px; font-family: inherit; font-size: 14px; resize: vertical; background: var(--surface); color: var(--ink); }
-.checkout__hint { color: var(--muted); font-size: 13px; margin: 6px 0 14px; }
+.co-sum { background: var(--bg); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 12px 14px; margin-bottom: 16px; }
+.co-sum__row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 3px 0; }
+.co-sum__row small { color: var(--muted); }
+.co-sum__total { display: flex; justify-content: space-between; font-weight: 800; color: var(--navy); border-top: 1px solid var(--line); margin-top: 6px; padding-top: 8px; }
+.co-form { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+.co-field { display: flex; flex-direction: column; gap: 5px; font-size: 13px; font-weight: 700; color: var(--muted); }
+.co-field span small { font-weight: 500; }
+.co-field input, .co-field textarea { font-family: inherit; font-size: 15px; font-weight: 500; color: var(--ink); width: 100%; padding: 11px 13px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+.co-field input::placeholder, .co-field textarea::placeholder { color: #b3b3b8; }
+.co-field input:focus, .co-field textarea:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(21,35,95,.1); }
+.co-field textarea { resize: vertical; min-height: 46px; }
+.co-type { display: flex; gap: 10px; }
+.co-type__opt { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border: 1px solid var(--line); border-radius: var(--radius-sm); cursor: pointer; font-weight: 700; font-size: 14px; color: var(--ink); transition: .15s; }
+.co-type__opt input { accent-color: var(--navy); }
+.co-type__opt:has(input:checked) { border-color: var(--navy); background: rgba(21,35,95,.05); }
 .checkout__actions { display: flex; flex-direction: column; gap: 10px; }
 .checkout__actions .btn { width: 100%; padding: 14px; }
 .checkout__note { background: #fff6e6; border: 1px solid #f3d9a3; border-radius: var(--radius-sm); padding: 12px 14px; font-size: 14px; color: #7a5b1a; }
