@@ -28,6 +28,8 @@ const MENU = {
         { name: 'С креветками', price: 420 },
         { name: 'Ойси', price: 420, img: 'pizza-oysi.jpg' },
         { name: 'Маргарита', price: 320, img: 'pizza-margarita.jpg' },
+        { name: 'Чесночная', price: 420, img: 'pizza-chesnochnaya.jpg' },
+        { name: 'Барбекю', price: 420, img: 'pizza-barbekyu.jpg', pos: '50% 55%' },
       ],
     },
     {
