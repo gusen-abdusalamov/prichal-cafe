@@ -123,15 +123,17 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .dishes { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
 .dish { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
 .dish:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-.dish__img { aspect-ratio: 4 / 3; overflow: hidden; background: #f0efec; }
+.dish__img { aspect-ratio: 1 / 1; overflow: hidden; background: #f0efec; }
 .dish__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
 .dish:hover .dish__img img { transform: scale(1.05); }
 /* Бургеры/гарниры — вертикальные фото, объект в нижней части кадра:
    квадратный кадр + привязка к низу, чтобы бургер был крупно и по центру */
-#cat-food-burgers .dish__img,
-#cat-food-nuggets .dish__img { aspect-ratio: 1 / 1; }
+/* привязка кадра по категориям — блюдо в центре */
 #cat-food-burgers .dish__img img,
 #cat-food-nuggets .dish__img img { object-position: center 78%; }
+#cat-food-rolls-cold .dish__img img,
+#cat-food-rolls-hot .dish__img img { object-position: center 62%; }
+#cat-food-shawarma .dish__img img { object-position: center 60%; }
 /* квадратный кадр для отдельных блюд (object-position задаётся в menu-data.js) */
 .dish__img--square { aspect-ratio: 1 / 1; }
 .dish__body { padding: 14px 15px 15px; display: flex; flex-direction: column; flex: 1; gap: 6px; }
