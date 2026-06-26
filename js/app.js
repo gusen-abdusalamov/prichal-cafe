@@ -27,14 +27,18 @@
   function addToCart(key, name, price, variant) {
     if (cart[key]) cart[key].qty += 1;
     else cart[key] = { name, price, variant: variant || '', qty: 1 };
-    saveCart(); renderCart(); pulseCartBtn();
+    saveCart(); renderCart(); syncCards(); pulseCartBtn();
   }
   function changeQty(key, delta) {
     if (!cart[key]) return;
     cart[key].qty += delta;
     if (cart[key].qty <= 0) delete cart[key];
-    saveCart(); renderCart();
+    saveCart(); renderCart(); syncCards();
   }
+
+  // карточки меню, умеющие отрисовать «+»/степпер по состоянию корзины
+  let cardSyncers = [];
+  function syncCards() { cardSyncers.forEach((fn) => fn()); }
 
   /* ---------- Рендер меню ---------- */
   function renderMenu() {
@@ -42,6 +46,7 @@
     const wrap = el('#menu-sections');
     chips.innerHTML = '';
     wrap.innerHTML = '';
+    cardSyncers = [];
 
     ['food', 'drinks'].forEach((group) => {
       MENU[group].forEach((cat) => {
@@ -92,7 +97,11 @@
       const ph = document.createElement('div');
       ph.className = 'dish__img' + (item.square ? ' dish__img--square' : '');
       const pos = item.pos ? ' style="object-position:' + item.pos + '"' : '';
-      ph.innerHTML = '<img loading="lazy" width="563" height="1000"' + pos + ' src="' + IMG + item.img + '?v=' + (item.v || '6') + '" alt="' + item.name + '">';
+      ph.innerHTML = '<img loading="lazy" decoding="async" width="563" height="1000"' + pos + ' src="' + IMG + item.img + '?v=' + (item.v || '6') + '" alt="' + item.name + '">';
+      const pic = ph.querySelector('img');
+      const reveal = () => ph.classList.add('is-loaded');
+      if (pic.complete) reveal();
+      else { pic.addEventListener('load', reveal); pic.addEventListener('error', reveal); }
       card.appendChild(ph);
     }
 
@@ -128,27 +137,65 @@
       priceEl.textContent = money(item.price);
     }
 
-    const addBtn = document.createElement('button');
-    addBtn.className = 'dish__add';
-    addBtn.setAttribute('aria-label', 'Добавить в корзину');
-    addBtn.innerHTML = '<span>+</span>';
-    addBtn.addEventListener('click', () => {
+    // мета текущего выбранного варианта (или базовой позиции)
+    function currentMeta() {
       if (item.variants) {
         const v = item.variants[select ? select.value : 0];
-        addToCart(baseId + '|' + v.label, item.name, v.price, v.label);
-      } else {
-        addToCart(baseId, item.name, item.price);
+        return { key: baseId + '|' + v.label, price: v.price, variant: v.label };
       }
-    });
+      return { key: baseId, price: item.price, variant: '' };
+    }
+
+    // контрол покупки: «+» когда в корзине пусто, иначе степпер «− N +»
+    const ctrl = document.createElement('div');
+    ctrl.className = 'dish__ctrl';
+    let lastKey = null, lastQty = -1;
+    function syncBuy() {
+      const m = currentMeta();
+      const qty = cart[m.key] ? cart[m.key].qty : 0;
+      if (m.key === lastKey && qty === lastQty) return;  // без лишней перерисовки
+      lastKey = m.key; lastQty = qty;
+      ctrl.innerHTML = '';
+      if (qty > 0) {
+        ctrl.classList.add('dish__ctrl--stepper');
+        const dec = document.createElement('button');
+        dec.className = 'dish__step';
+        dec.setAttribute('aria-label', 'Убрать одну порцию');
+        dec.textContent = '−';
+        dec.addEventListener('click', () => changeQty(m.key, -1));
+        const val = document.createElement('span');
+        val.className = 'dish__qty';
+        val.textContent = qty;
+        const inc = document.createElement('button');
+        inc.className = 'dish__step';
+        inc.setAttribute('aria-label', 'Добавить ещё порцию');
+        inc.textContent = '+';
+        inc.addEventListener('click', () => addToCart(m.key, item.name, m.price, m.variant));
+        ctrl.appendChild(dec); ctrl.appendChild(val); ctrl.appendChild(inc);
+      } else {
+        ctrl.classList.remove('dish__ctrl--stepper');
+        const add = document.createElement('button');
+        add.className = 'dish__add';
+        add.setAttribute('aria-label', 'Добавить в корзину');
+        add.innerHTML = '<span>+</span>';
+        add.addEventListener('click', () => addToCart(m.key, item.name, m.price, m.variant));
+        ctrl.appendChild(add);
+      }
+    }
+    // при смене варианта пересчитать количество для нового ключа
+    if (select) select.addEventListener('change', syncBuy);
 
     const priceWrap = document.createElement('div');
     priceWrap.className = 'dish__buy';
     priceWrap.appendChild(priceEl);
-    priceWrap.appendChild(addBtn);
+    priceWrap.appendChild(ctrl);
     foot.appendChild(priceWrap);
 
     body.appendChild(foot);
     card.appendChild(body);
+
+    syncBuy();
+    cardSyncers.push(syncBuy);
     return card;
   }
 

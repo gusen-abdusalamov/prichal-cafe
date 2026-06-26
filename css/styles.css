@@ -132,9 +132,14 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .dishes { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
 .dish { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .15s, box-shadow .15s; }
 .dish:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-.dish__img { aspect-ratio: 1 / 1; overflow: hidden; background: #f0efec; }
-.dish__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; }
+.dish__img { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #f0efec; }
+/* скелетон-мерцание, пока фото грузится */
+.dish__img::before { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(100deg, #eeede9 25%, #f7f6f4 50%, #eeede9 75%); background-size: 220% 100%; animation: shimmer 1.4s ease-in-out infinite; transition: opacity .35s ease; }
+.dish__img.is-loaded::before { opacity: 0; animation: none; }
+.dish__img img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: transform .4s, opacity .5s ease; }
+.dish__img.is-loaded img { opacity: 1; }
 .dish:hover .dish__img img { transform: scale(1.05); }
+@keyframes shimmer { to { background-position: -220% 0; } }
 /* Бургеры/гарниры — вертикальные фото, объект в нижней части кадра:
    квадратный кадр + привязка к низу, чтобы бургер был крупно и по центру */
 /* привязка кадра по категориям — блюдо в центре */
@@ -151,10 +156,18 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .dish__desc { color: var(--muted); font-size: 13px; margin: 0; }
 .dish__foot { margin-top: auto; padding-top: 10px; display: flex; flex-direction: column; gap: 10px; }
 .dish__variant { width: 100%; padding: 8px 10px; border-radius: var(--radius-sm); border: 1px solid var(--line); background: #fff; font-family: inherit; font-size: 13px; color: var(--ink); }
-.dish__buy { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.dish__buy { display: flex; align-items: center; justify-content: space-between; gap: 8px 10px; flex-wrap: wrap; }
 .dish__price { font-weight: 800; font-size: 18px; color: var(--navy); }
+.dish__ctrl { display: inline-flex; align-items: center; margin-left: auto; }
 .dish__add { width: 40px; height: 40px; border-radius: 12px; background: var(--navy); color: #fff; font-size: 24px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; transition: .15s; }
 .dish__add:hover { background: var(--red); transform: rotate(90deg); }
+/* степпер «− N +» прямо на карточке */
+.dish__ctrl--stepper { gap: 2px; padding: 3px; background: var(--surface); border: 1px solid var(--line); border-radius: 13px; box-shadow: var(--shadow); animation: stepIn .18s ease; }
+.dish__step { width: 32px; height: 34px; border-radius: 10px; background: var(--bg); color: var(--navy); font-size: 20px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; transition: background .15s, color .15s; }
+.dish__step:hover { background: var(--navy); color: #fff; }
+.dish__qty { min-width: 26px; text-align: center; font-weight: 800; font-size: 15px; color: var(--navy); animation: qtyPop .2s ease; }
+@keyframes stepIn { from { transform: scale(.86); opacity: .4; } to { transform: scale(1); opacity: 1; } }
+@keyframes qtyPop { from { transform: scale(.6); } to { transform: scale(1); } }
 
 /* ===== О нас ===== */
 .about__grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
@@ -283,4 +296,10 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
   .brand { font-size: 17px; }
   .brand img { width: 34px; height: 34px; }
   .icon-call { padding: 8px 11px; font-size: 13px; gap: 6px; }
+}
+
+/* меньше движения — для тех, кто его отключил в системе */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .dish__img img { opacity: 1; }
 }
