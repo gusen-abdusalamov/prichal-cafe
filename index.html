@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
 <body>
 
@@ -28,7 +28,8 @@
       </nav>
       <div class="header__actions">
         <a class="btn btn--ghost btn--sm icon-call" data-phone-link href="#contacts">
-          📞 <span data-phone-text data-fallback="Позвонить">Позвонить</span>
+          <svg class="ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 21A13.5 13.5 0 0 1 3 8.5 2 2 0 0 1 5 6.4l2.1-.3a1.5 1.5 0 0 1 1.6 1l.9 2.3a1.5 1.5 0 0 1-.4 1.7l-1 .9a11 11 0 0 0 3.8 3.8l.9-1a1.5 1.5 0 0 1 1.7-.4l2.3.9a1.5 1.5 0 0 1 1 1.6l-.3 2.1A2 2 0 0 1 15.5 21Z"/></svg>
+          <span data-phone-text data-fallback="Позвонить">Позвонить</span>
         </a>
         <a class="btn btn--primary" href="#menu">Заказать</a>
         <button class="nav-toggle" id="nav-toggle" aria-label="Меню"><span></span></button>
@@ -42,17 +43,26 @@
       <img src="assets/img/roll-goryachiy-shik.jpg?v=4" alt="Роллы Причал">
     </div>
     <div class="wrap hero__inner">
-      <span class="hero__eyebrow">🛥 <span data-city data-fallback="Ваш город">Ваш город</span> · доставка и самовывоз</span>
+      <span class="hero__eyebrow"><span data-city data-fallback="Ваш город">Ваш город</span> · доставка и самовывоз</span>
       <h1>Кафе <span data-cafe-name>Причал</span></h1>
       <p data-tagline>Роллы, пицца, бургеры и авторский кофе. Готовим из свежих продуктов и привозим горячим.</p>
       <div class="hero__cta">
         <a class="btn btn--primary" href="#menu">Смотреть меню</a>
-        <button class="btn btn--ghost" data-open-cart>🛒 Моя корзина</button>
+        <button class="btn btn--ghost" data-open-cart><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2.2l2.2 11a1.5 1.5 0 0 0 1.5 1.2h7.6a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.4"/></svg> Моя корзина</button>
       </div>
       <div class="hero__meta">
-        <div>📍 <b data-address data-fallback="Адрес уточняется">Адрес уточняется</b></div>
-        <div>🕑 <b data-hours data-fallback="Часы уточняются">Часы уточняются</b></div>
-        <div>📞 <b data-phone-text data-fallback="Телефон уточняется">Телефон уточняется</b></div>
+        <div>
+          <svg class="hero__ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="2.7"/></svg>
+          <b data-address data-fallback="Адрес уточняется">Адрес уточняется</b>
+        </div>
+        <div>
+          <svg class="hero__ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 1.8"/></svg>
+          <b data-hours data-fallback="Часы уточняются">Часы уточняются</b>
+        </div>
+        <div>
+          <svg class="hero__ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 21A13.5 13.5 0 0 1 3 8.5 2 2 0 0 1 5 6.4l2.1-.3a1.5 1.5 0 0 1 1.6 1l.9 2.3a1.5 1.5 0 0 1-.4 1.7l-1 .9a11 11 0 0 0 3.8 3.8l.9-1a1.5 1.5 0 0 1 1.7-.4l2.3.9a1.5 1.5 0 0 1 1 1.6l-.3 2.1A2 2 0 0 1 15.5 21Z"/></svg>
+          <b data-phone-text data-fallback="Телефон уточняется">Телефон уточняется</b>
+        </div>
       </div>
     </div>
   </section>
@@ -65,7 +75,6 @@
         <li>Доставка и самовывоз</li>
         <li>Свежие роллы каждый день</li>
         <li>Авторский кофе</li>
-        <li>Оплата при получении</li>
       </ul>
     </div>
   </div>
@@ -77,8 +86,8 @@
       <p class="section__lead">Выберите блюда и напитки — соберите заказ, а мы приготовим и привезём.</p>
 
       <div class="group-tabs" role="tablist">
-        <button class="group-tab group-tab--active" data-group="food">🍽 Кухня</button>
-        <button class="group-tab" data-group="drinks">☕ Напитки</button>
+        <button class="group-tab group-tab--active" data-group="food">Кухня</button>
+        <button class="group-tab" data-group="drinks">Напитки</button>
       </div>
     </div>
 
@@ -192,7 +201,8 @@
 
   <!-- Плавающая корзина -->
   <button class="cart-fab" id="cart-fab">
-    🛒 <span id="fab-total"></span>
+    <svg class="ic" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2.2l2.2 11a1.5 1.5 0 0 0 1.5 1.2h7.6a1.5 1.5 0 0 0 1.5-1.1L20.5 8H6.4"/></svg>
+    <span id="fab-total"></span>
     <span class="cart-fab__badge is-hidden" data-cart-count>0</span>
   </button>
 
