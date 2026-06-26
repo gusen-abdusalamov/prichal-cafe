@@ -66,6 +66,11 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .nav a { font-weight: 600; font-size: 15px; color: var(--ink); transition: color .15s; }
 .nav a:hover { color: #cf322b; }
 .header__actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle { width: 40px; height: 40px; flex: none; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); display: inline-flex; align-items: center; justify-content: center; transition: border-color .15s, color .15s, background .15s; }
+.theme-toggle:hover { border-color: var(--navy); color: var(--navy); }
+.theme-toggle__sun { display: none; }
+[data-theme="dark"] .theme-toggle__moon { display: none; }
+[data-theme="dark"] .theme-toggle__sun { display: inline-block; }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 15px; padding: 11px 18px; border-radius: 999px; white-space: nowrap; transition: transform .12s, box-shadow .15s, background .15s; }
 .ic { flex: none; }
@@ -233,7 +238,8 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
 .cart__ship-text b { color: var(--red); }
 .cart__ship-bar { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
 .cart__ship-fill { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--amber), var(--red)); transition: width .4s ease; }
-.cart__ship--done .cart__ship-text { color: #0e7a5f; }
+.cart__ship--done .cart__ship-text { color: #0e7a5f; display: flex; align-items: center; gap: 7px; }
+.cart__ship-ic { flex: none; }
 .cart__ship--done .cart__ship-fill { background: linear-gradient(90deg, #1faa59, #0e7a5f); }
 .cart__items { flex: 1; overflow-y: auto; padding: 14px 20px; display: flex; flex-direction: column; gap: 12px; }
 .cart__empty { color: var(--muted); text-align: center; margin-top: 40px; line-height: 1.7; }
@@ -311,3 +317,41 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
   * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .dish__img img { opacity: 1; }
 }
+
+/* ===== Тёмная тема ===== */
+[data-theme="dark"] {
+  --navy: #6f86ec;        /* бренд-синий ярче — работает и как заливка, и как акцентный текст */
+  --navy-700: #5e75e0;
+  --red: #f04a40;
+  --amber: #f6a623;
+
+  --ink: #e9eaf0;
+  --muted: #9a9ca8;
+  --bg: #13151b;
+  --surface: #1c1f28;
+  --line: #2b2f3a;
+
+  --shadow: 0 6px 24px rgba(0, 0, 0, .45);
+  --shadow-lg: 0 18px 50px rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+/* плавный переход при переключении темы */
+body, .header, .chips-bar, .dish, .info-card, .cart, .modal__box { transition: background-color .25s ease, border-color .25s ease, color .25s ease; }
+
+[data-theme="dark"] .header { background: rgba(19, 21, 27, .85); }
+[data-theme="dark"] .chips-bar { background: rgba(19, 21, 27, .9); }
+/* секции-подложки держим глубоко-тёмными, а не ярко-синими */
+[data-theme="dark"] .marquee,
+[data-theme="dark"] .footer { background: #0e1015; }
+[data-theme="dark"] .footer { color: rgba(255, 255, 255, .72); }
+/* плейсхолдер/скелетон фото — тёмные, чтобы не вспыхивали белым */
+[data-theme="dark"] .dish__img { background: #23262f; }
+[data-theme="dark"] .dish__img::before { background: linear-gradient(100deg, #1f222b 25%, #2b2f3a 50%, #1f222b 75%); }
+[data-theme="dark"] .dish__variant { background: #11131a; color: var(--ink); }
+/* активный чип: тёмный текст на янтаре остаётся читаемым */
+[data-theme="dark"] .chip--active { color: #15235f; }
+/* лёгкая подсветка выбранного типа доставки */
+[data-theme="dark"] .co-type__opt:has(input:checked) { background: rgba(111, 134, 236, .12); }
+/* success «бесплатная доставка» — ярче на тёмном */
+[data-theme="dark"] .cart__ship--done .cart__ship-text { color: #34d17e; }
+[data-theme="dark"] .cart__ship--done .cart__ship-fill { background: linear-gradient(90deg, #2bbf6e, #18a05a); }

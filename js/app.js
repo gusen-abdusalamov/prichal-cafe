@@ -50,6 +50,10 @@
 
     ['food', 'drinks'].forEach((group) => {
       MENU[group].forEach((cat) => {
+        // кухня: пока показываем только позиции с фото (вернутся, как только добавить img)
+        const isHidden = (item) => group === 'food' && !item.img;
+        if (cat.items.every(isHidden)) return;  // категория без видимых позиций — пропускаем
+
         // чип категории
         const chip = document.createElement('button');
         chip.className = 'chip';
@@ -78,6 +82,7 @@
         const grid = document.createElement('div');
         grid.className = 'dishes';
         cat.items.forEach((item, idx) => {
+          if (isHidden(item)) return;  // пропускаем кухню без фото (idx сохраняем для ключей)
           grid.appendChild(dishCard(group, cat.id, idx, item));
         });
         section.appendChild(grid);
@@ -225,7 +230,11 @@
     if (total >= free) {
       box.classList.add('cart__ship--done');
       fill.style.width = '100%';
-      txt.textContent = '🎉 Бесплатная доставка — ваш заказ её достиг!';
+      // премиальный success: галочка-бейдж + лаконичный текст (статичная разметка)
+      txt.innerHTML = '<svg class="cart__ship-ic" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">' +
+        '<circle cx="12" cy="12" r="10" fill="currentColor" opacity=".16"/>' +
+        '<path d="M16.5 8.8 10.6 14.7 7.5 11.6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<span>Бесплатная доставка включена</span>';
     } else {
       box.classList.remove('cart__ship--done');
       fill.style.width = Math.min(100, Math.round((total / free) * 100)) + '%';
@@ -514,6 +523,20 @@
     renderCart();
 
     els('.group-tab').forEach((t) => t.addEventListener('click', () => setGroup(t.dataset.group)));
+
+    // переключатель темы (начальная тема уже выставлена inline-скриптом в <head>)
+    const metaTheme = el('#meta-theme-color');
+    const themeColors = { light: '#faf9f7', dark: '#13151b' };
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      if (metaTheme) metaTheme.setAttribute('content', themeColors[theme] || themeColors.light);
+      try { localStorage.setItem('prichal_theme', theme); } catch (e) {}
+    }
+    setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
+    const themeBtn = el('#theme-toggle');
+    if (themeBtn) themeBtn.addEventListener('click', () => {
+      setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
 
     el('#cart-fab').addEventListener('click', openCart);
     els('[data-open-cart]').forEach((b) => b.addEventListener('click', openCart));
