@@ -53,7 +53,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <link rel="preload" as="image" href="assets/img/roll-goryachiy-shik.jpg?v=6" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css?v=14">
+  <link rel="stylesheet" href="css/styles.css?v=15">
 </head>
 <body>
 
@@ -241,6 +241,10 @@
       <h3>Корзина <span class="cart-fab__badge is-hidden" data-cart-count style="background:var(--navy);color:#fff">0</span></h3>
       <button class="cart__close" id="cart-close" aria-label="Закрыть">×</button>
     </div>
+    <div class="cart__ship is-hidden" id="cart-ship" aria-live="polite">
+      <p class="cart__ship-text" id="cart-ship-text"></p>
+      <div class="cart__ship-bar"><span class="cart__ship-fill" id="cart-ship-fill"></span></div>
+    </div>
     <div class="cart__items" id="cart-items"></div>
     <div class="cart__foot">
       <div class="cart__total"><span>Итого</span><span id="cart-total">0 ₽</span></div>
@@ -284,8 +288,8 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/config.js?v=7"></script>
+  <script src="js/config.js?v=8"></script>
   <script src="js/menu-data.js?v=11"></script>
-  <script src="js/app.js?v=13"></script>
+  <script src="js/app.js?v=14"></script>
 </body>
 </html>

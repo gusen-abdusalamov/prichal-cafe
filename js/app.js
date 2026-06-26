@@ -212,6 +212,30 @@
     });
   }
 
+  /* ---------- Прогресс «до бесплатной доставки» ---------- */
+  function renderShipBar(total) {
+    const box = el('#cart-ship');
+    if (!box) return;
+    const free = (CONFIG.delivery && CONFIG.delivery.freeFrom) || 0;
+    if (!free || total <= 0) { box.classList.add('is-hidden'); return; }
+    box.classList.remove('is-hidden');
+    const fill = el('#cart-ship-fill');
+    const txt = el('#cart-ship-text');
+    txt.textContent = '';
+    if (total >= free) {
+      box.classList.add('cart__ship--done');
+      fill.style.width = '100%';
+      txt.textContent = '🎉 Бесплатная доставка — ваш заказ её достиг!';
+    } else {
+      box.classList.remove('cart__ship--done');
+      fill.style.width = Math.min(100, Math.round((total / free) * 100)) + '%';
+      txt.append('До бесплатной доставки ещё ');
+      const b = document.createElement('b');
+      b.textContent = money(free - total);
+      txt.append(b);
+    }
+  }
+
   /* ---------- Рендер корзины ---------- */
   function renderCart() {
     const count = cartCount();
@@ -223,6 +247,7 @@
     });
     el('#cart-total').textContent = money(total);
     el('#fab-total').textContent = count ? money(total) : '';
+    renderShipBar(total);
 
     const list = el('#cart-items');
     list.innerHTML = '';
@@ -284,7 +309,13 @@
     lines.push('', 'Итого: ' + money(cartTotal()), '');
     lines.push('Имя: ' + f.name);
     lines.push('Телефон: ' + f.phone);
-    lines.push(f.type === 'Самовывоз' ? 'Самовывоз' : ('Доставка по адресу: ' + f.address));
+    if (f.type === 'Самовывоз') {
+      lines.push('Самовывоз');
+    } else {
+      lines.push('Доставка по адресу: ' + f.address);
+      const free = (CONFIG.delivery && CONFIG.delivery.freeFrom) || 0;
+      if (free && cartTotal() >= free) lines.push('Доставка: бесплатно (заказ от ' + money(free) + ')');
+    }
     if (f.comment) lines.push('Комментарий: ' + f.comment);
     return lines.join('\n');
   }
