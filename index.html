@@ -4,12 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Причал — роллы, пицца, бургеры и кофе с доставкой</title>
-  <meta name="description" content="Кафе «Причал»: роллы, пицца, бургеры, шаурма и авторский кофе. Закажите доставку прямо с сайта в WhatsApp или Telegram.">
-  <link rel="icon" href="assets/img/logo.jpg">
+  <meta name="description" content="Кафе «Причал» в Левашах: роллы, пицца, бургеры, шаурма и авторский кофе. Закажите доставку прямо с сайта в WhatsApp или Telegram.">
+  <link rel="canonical" href="https://gusen-abdusalamov.github.io/prichal-cafe/">
+
+  <!-- Open Graph / соцсети (превью ссылки в WhatsApp, Telegram, ВК) -->
+  <meta property="og:type" content="restaurant">
+  <meta property="og:site_name" content="Кафе «Причал»">
+  <meta property="og:title" content="Причал — роллы, пицца, бургеры и кофе с доставкой">
+  <meta property="og:description" content="Роллы, пицца, бургеры, шаурма и авторский кофе в Левашах. Доставка и самовывоз — заказ в пару кликов.">
+  <meta property="og:image" content="https://gusen-abdusalamov.github.io/prichal-cafe/assets/img/roll-goryachiy-shik.jpg?v=6">
+  <meta property="og:url" content="https://gusen-abdusalamov.github.io/prichal-cafe/">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Причал — роллы, пицца, бургеры и кофе с доставкой">
+  <meta name="twitter:description" content="Роллы, пицца, бургеры, шаурма и авторский кофе в Левашах. Доставка и самовывоз.">
+  <meta name="twitter:image" content="https://gusen-abdusalamov.github.io/prichal-cafe/assets/img/roll-goryachiy-shik.jpg?v=6">
+
+  <!-- Структурированные данные для поиска (карточка заведения в Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Кафе «Причал»",
+    "image": "https://gusen-abdusalamov.github.io/prichal-cafe/assets/img/roll-goryachiy-shik.jpg?v=6",
+    "url": "https://gusen-abdusalamov.github.io/prichal-cafe/",
+    "servesCuisine": ["Роллы", "Пицца", "Бургеры", "Шаурма", "Кофе"],
+    "priceRange": "₽₽",
+    "telephone": "+79896662252",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "село Леваши",
+      "addressLocality": "Леваши",
+      "addressRegion": "Республика Дагестан",
+      "addressCountry": "RU"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "10:00",
+      "closes": "23:00"
+    },
+    "sameAs": ["https://instagram.com/prichal_levashi"]
+  }
+  </script>
+
+  <link rel="icon" href="assets/img/logo.jpg?v=6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="preload" as="image" href="assets/img/roll-goryachiy-shik.jpg?v=6" fetchpriority="high">
+  <link rel="stylesheet" href="css/styles.css?v=13">
 </head>
 <body>
 
@@ -17,7 +61,7 @@
   <header class="header">
     <div class="wrap header__inner">
       <a href="#top" class="brand">
-        <img src="assets/img/logo.jpg" alt="Логотип Причал">
+        <img src="assets/img/logo.jpg?v=6" alt="Логотип Причал" width="38" height="38" decoding="async">
         <span data-cafe-name>Причал</span>
       </a>
       <nav class="nav" id="nav">
@@ -32,7 +76,7 @@
           <span data-phone-text data-fallback="Позвонить">Позвонить</span>
         </a>
         <a class="btn btn--primary" href="#menu">Заказать</a>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Меню"><span></span></button>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Меню" aria-controls="nav" aria-expanded="false"><span></span></button>
       </div>
     </div>
   </header>
@@ -40,7 +84,7 @@
   <!-- HERO -->
   <section class="hero" id="top">
     <div class="hero__bg">
-      <img src="assets/img/roll-goryachiy-shik.jpg?v=4" alt="Роллы Причал">
+      <img src="assets/img/roll-goryachiy-shik.jpg?v=6" alt="Роллы Причал" width="726" height="1290" fetchpriority="high" decoding="async">
     </div>
     <div class="wrap hero__inner">
       <span class="hero__eyebrow"><span data-city data-fallback="Ваш город">Ваш город</span> · доставка и самовывоз</span>
@@ -116,9 +160,9 @@
         </div>
       </div>
       <div class="about__media">
-        <img src="assets/img/roll-syrnyy.jpg?v=4" alt="Ролл">
-        <img src="assets/img/roll-california.jpg?v=4" alt="Калифорния">
-        <img src="assets/img/krevetki-klyar.jpg?v=4" alt="Креветки в кляре">
+        <img src="assets/img/roll-syrnyy.jpg?v=6" alt="Ролл «Сырный»" width="563" height="1000" loading="lazy" decoding="async">
+        <img src="assets/img/roll-california.jpg?v=6" alt="Ролл «Калифорния»" width="563" height="1000" loading="lazy" decoding="async">
+        <img src="assets/img/krevetki-klyar.jpg?v=6" alt="Креветки в кляре" width="563" height="1000" loading="lazy" decoding="async">
       </div>
     </div>
   </section>
@@ -127,24 +171,8 @@
   <section class="section promos" id="promos">
     <div class="wrap">
       <h2 class="section__title">Акции и новости</h2>
-      <p class="section__lead">Примеры блоков — замените на свои актуальные предложения.</p>
-      <div class="promo-grid">
-        <div class="promo promo--1">
-          <span class="promo__tag">АКЦИЯ</span>
-          <h3>−15% на первый заказ</h3>
-          <p>Закажите доставку впервые и получите скидку на весь чек.</p>
-        </div>
-        <div class="promo promo--2">
-          <span class="promo__tag">ХИТ</span>
-          <h3>Сет дня</h3>
-          <p>Большой набор роллов по специальной цене — следите за обновлениями.</p>
-        </div>
-        <div class="promo promo--3">
-          <span class="promo__tag">НОВИНКА</span>
-          <h3>Кофе + ролл</h3>
-          <p>Авторский раф и горячий ролл — идеальная пара на перекус.</p>
-        </div>
-      </div>
+      <p class="section__lead">Свежие предложения и сезонные новинки кафе «Причал».</p>
+      <div class="promo-grid" id="promo-grid"></div>
     </div>
   </section>
 
@@ -156,7 +184,7 @@
         <div class="info-card">
           <h3>Адрес</h3>
           <p data-address data-fallback="Уточняется">Уточняется</p>
-          <a class="btn btn--ghost btn--sm" data-map href="#" target="_blank" style="margin-top:10px">Как добраться</a>
+          <a class="btn btn--ghost btn--sm" data-map href="#" target="_blank" rel="noopener" style="margin-top:10px">Как добраться</a>
         </div>
         <div class="info-card">
           <h3>Часы работы</h3>
@@ -192,7 +220,7 @@
   <footer class="footer">
     <div class="wrap footer__inner">
       <a href="#top" class="brand">
-        <img src="assets/img/logo.jpg" alt="Логотип Причал">
+        <img src="assets/img/logo.jpg?v=6" alt="Логотип Причал" width="38" height="38" decoding="async">
         <span data-cafe-name>Причал</span>
       </a>
       <small>© <span id="year">2026</span> Кафе «Причал». Все права защищены.</small>
@@ -208,7 +236,7 @@
 
   <!-- Drawer корзины -->
   <div class="overlay" id="overlay"></div>
-  <aside class="cart" id="cart" aria-label="Корзина">
+  <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-label="Корзина">
     <div class="cart__head">
       <h3>Корзина <span class="cart-fab__badge is-hidden" data-cart-count style="background:var(--navy);color:#fff">0</span></h3>
       <button class="cart__close" id="cart-close" aria-label="Закрыть">×</button>
@@ -222,7 +250,7 @@
 
   <!-- Модалка оформления -->
   <div class="modal" id="checkout-modal">
-    <div class="modal__box">
+    <div class="modal__box" role="dialog" aria-modal="true" aria-label="Оформление заказа">
       <div class="modal__head">
         <h3>Оформление заказа</h3>
         <button class="modal__close" id="checkout-close" aria-label="Закрыть">×</button>
@@ -254,10 +282,10 @@
     </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/config.js?v=6"></script>
-  <script src="js/menu-data.js?v=10"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="js/config.js?v=7"></script>
+  <script src="js/menu-data.js?v=11"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>

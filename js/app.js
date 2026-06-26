@@ -92,7 +92,7 @@
       const ph = document.createElement('div');
       ph.className = 'dish__img' + (item.square ? ' dish__img--square' : '');
       const pos = item.pos ? ' style="object-position:' + item.pos + '"' : '';
-      ph.innerHTML = '<img loading="lazy"' + pos + ' src="' + IMG + item.img + '?v=' + (item.v || '4') + '" alt="' + item.name + '">';
+      ph.innerHTML = '<img loading="lazy" width="563" height="1000"' + pos + ' src="' + IMG + item.img + '?v=' + (item.v || '6') + '" alt="' + item.name + '">';
       card.appendChild(ph);
     }
 
@@ -194,7 +194,7 @@
       row.className = 'cart-row';
       row.innerHTML =
         '<div class="cart-row__info">' +
-          '<span class="cart-row__name">' + it.name + (it.variant ? ' <small>' + it.variant + '</small>' : '') + '</span>' +
+          '<span class="cart-row__name"></span>' +
           '<span class="cart-row__price">' + money(it.price) + '</span>' +
         '</div>' +
         '<div class="qty">' +
@@ -202,6 +202,13 @@
           '<span class="qty__val">' + it.qty + '</span>' +
           '<button class="qty__btn" data-inc aria-label="Больше">+</button>' +
         '</div>';
+      const nameEl = row.querySelector('.cart-row__name');
+      nameEl.textContent = it.name;
+      if (it.variant) {
+        const sm = document.createElement('small');
+        sm.textContent = ' ' + it.variant;
+        nameEl.appendChild(sm);
+      }
       row.querySelector('[data-dec]').addEventListener('click', () => changeQty(key, -1));
       row.querySelector('[data-inc]').addEventListener('click', () => changeQty(key, +1));
       list.appendChild(row);
@@ -388,10 +395,43 @@
     });
   }
 
+  /* ---------- Акции (из CONFIG.promos) ---------- */
+  function renderPromos() {
+    const grid = el('#promo-grid');
+    if (!grid) return;
+    const list = Array.isArray(CONFIG.promos) ? CONFIG.promos : [];
+    if (!list.length) {
+      const sec = el('#promos');
+      if (sec) sec.style.display = 'none';
+      return;
+    }
+    grid.innerHTML = '';
+    list.forEach((p, i) => {
+      const card = document.createElement('div');
+      card.className = 'promo promo--' + ((i % 3) + 1);
+      if (p.tag) {
+        const tag = document.createElement('span');
+        tag.className = 'promo__tag';
+        tag.textContent = p.tag;
+        card.appendChild(tag);
+      }
+      const h = document.createElement('h3');
+      h.textContent = p.title || '';
+      card.appendChild(h);
+      if (p.text) {
+        const para = document.createElement('p');
+        para.textContent = p.text;
+        card.appendChild(para);
+      }
+      grid.appendChild(card);
+    });
+  }
+
   /* ---------- Инициализация ---------- */
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('year').textContent = new Date().getFullYear();
     applyConfig();
+    renderPromos();
     renderMenu();
     renderCart();
 
@@ -412,8 +452,26 @@
     }));
 
     // мобильное меню-бургер
-    el('#nav-toggle').addEventListener('click', () => el('#nav').classList.toggle('is-open'));
-    els('#nav a').forEach((a) => a.addEventListener('click', () => el('#nav').classList.remove('is-open')));
+    const navToggle = el('#nav-toggle');
+    navToggle.addEventListener('click', () => {
+      const open = el('#nav').classList.toggle('is-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    els('#nav a').forEach((a) => a.addEventListener('click', () => {
+      el('#nav').classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+
+    // закрытие модалок/корзины по Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (el('#checkout-modal').classList.contains('is-open')) closeModal();
+      else if (el('#cart').classList.contains('is-open')) closeCart();
+      else if (el('#nav').classList.contains('is-open')) {
+        el('#nav').classList.remove('is-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
 
     // подсветка активного чипа категории при скролле
     const observer = new IntersectionObserver((entries) => {
