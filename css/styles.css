@@ -309,7 +309,12 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; margin: 0;
   .header__inner { gap: 10px; }
   .brand { font-size: 17px; }
   .brand img { width: 34px; height: 34px; }
-  .icon-call { padding: 8px 11px; font-size: 13px; gap: 6px; }
+}
+/* на телефонах/планшетах в шапке оставляем только значок телефона —
+   так полностью помещается название «Причал» */
+@media (max-width: 640px) {
+  .icon-call span { display: none; }
+  .icon-call { padding: 9px 12px; gap: 0; }
 }
 
 /* меньше движения — для тех, кто его отключил в системе */
